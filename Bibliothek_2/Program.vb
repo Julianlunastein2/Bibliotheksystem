@@ -1,23 +1,20 @@
 Imports System
+Imports System.IO
 
 Module Program
     Sub Main(args As String())
 
         'daten für hinterlegte Bücher aus lokaler "library_books.csv" Datei laden
 
-        Dim libraryData() As String = File.ReadAllLines("C:\library_books.csv")
+        Dim libraryData() As String = File.ReadAllLines("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_books.csv")
 
         'Testdaten für hinterlegte Benutzer
 
-        Dim usrTestData As String =
-        "U001;Max Mustermann|" &
-        "U002;Erika Musterfrau|" &
-        "U003;Hans Meier|" &
-        "U004;Laura Schmidt"
+        Dim userData() As String = File.ReadAllLines("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_users.csv")
 
 
         'Willkommenstext und Menüoptionen anzeigen
-
+        Console.WriteLine("====================================")
         Console.WriteLine("Willkommen zum Bibliothekssystem!")
         Console.WriteLine("Bitte wählen Sie eine Aktion aus:")
         Console.WriteLine("")
@@ -31,7 +28,7 @@ Module Program
         Console.WriteLine("(5) Buch zurückgeben")
         Console.WriteLine("(6) Ausgeliehene Bücher eines Benutzers anzeigen")
         Console.WriteLine("(7) Programm schließen")
-        Console.WriteLine("")
+        Console.WriteLine("=====================================")
         'Schleife, um das Menü erneut anzuzeigen, bis der Benutzer das Programm schließt
         Dim exitProgram As Boolean = False
         While exitProgram = False
@@ -44,21 +41,20 @@ Module Program
                 Case "1"
                     Console.WriteLine("Neuen Benutzer anlegen ausgewählt.")
                 'Hier könnte der Code zum Anlegen eines neuen Benutzers eingefügt werden
+
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
-                    'Alle Bücher mit Isbn und Titel aus String ausgeben
-                    Dim books As String() = libraryData.Split("|"c)
-                    For Each book As String In books
-                        Dim bookDetails As String() = book.Split(";"c)
+                    'Alle Bücher mit Isbn und Titel aus vorher augelsener Datei ausgeben
+                    For Each line As String In libraryData
+                        Dim bookDetails As String() = line.Split(","c)
                         Console.WriteLine($"ISBN: {bookDetails(0)}, Titel: {bookDetails(1)}")
                     Next
 
                 Case "3"
                     Console.WriteLine("ALLE NUTZER.")
                     'Alle Benutzer mit Id und Name aus String ausgeben
-                    Dim users As String() = usrTestData.Split("|"c)
-                    For Each user As String In users
-                        Dim userDetails As String() = user.Split(";"c)
+                    For Each user As String In userData
+                        Dim userDetails As String() = user.Split(","c)
                         Console.WriteLine($"ID: {userDetails(0)}, Name: {userDetails(1)}")
                     Next
 
@@ -78,6 +74,9 @@ Module Program
                     'Absicherung vor ungültiger Eingabe
                 Case Else
                     Console.WriteLine("Ungültige Auswahl. Bitte wählen Sie eine gültige Option aus.")
+
+                    Console.WriteLine("")
+
             End Select
         End While
 
