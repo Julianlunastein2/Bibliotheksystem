@@ -4,13 +4,13 @@ Imports System.IO
 Module Program
     Sub Main(args As String())
 
-        'daten für hinterlegte Bücher aus lokaler "library_books.csv" Datei laden
-
-        Dim libraryData() As String = File.ReadAllLines("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_books.csv")
+        'daten für hinterlegte Bücher aus in Projektmappe liegender Datei "library_books.csv" laden
+        Dim libraryPath As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "library_books.csv")
+        Dim libraryData() As String = File.ReadAllLines(libraryPath)
 
         'Testdaten für hinterlegte Benutzer
-
-        Dim userData() As String = File.ReadAllLines("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_users.csv")
+        Dim userPath As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "library_users.csv")
+        Dim userData() As String = File.ReadAllLines(userPath)
 
 
         'Willkommenstext und Menüoptionen anzeigen
@@ -54,7 +54,10 @@ Module Program
 
                     File.AppendAllText("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_users.csv", Environment.NewLine & "U" & ID & "," & Name)
 
+                    Console.WriteLine($"Neuer Benutzer '{Name}' mit ID 'U{ID}' wurde angelegt.")
+                    Console.WriteLine("")
                     Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
                     'Alle Bücher mit Isbn und Titel aus vorher augelsener Datei ausgeben
@@ -62,6 +65,8 @@ Module Program
                         Dim bookDetails As String() = line.Split(","c)
                         Console.WriteLine($"ISBN: {bookDetails(0)}, Titel: {bookDetails(1)}")
                     Next
+                    Console.WriteLine("")
+                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
 
                 Case "3"
                     Console.WriteLine("ALLE NUTZER.")
@@ -70,16 +75,27 @@ Module Program
                         Dim userDetails As String() = user.Split(","c)
                         Console.WriteLine($"ID: {userDetails(0)}, Name: {userDetails(1)}")
                     Next
+                    Console.WriteLine("")
+                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
 
                 Case "4"
                     Console.WriteLine("Buch ausleihen ausgewählt.")
-                'Hier könnte der Code zum Ausleihen eines Buches eingefügt werden
+                    'Hier könnte der Code zum Ausleihen eines Buches eingefügt werden
+                    Console.WriteLine("")
+                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+
                 Case "5"
                     Console.WriteLine("Buch zurückgeben ausgewählt.")
-                'Hier könnte der Code zum Zurückgeben eines Buches eingefügt werden
+                    'Hier könnte der Code zum Zurückgeben eines Buches eingefügt werden
+                    Console.WriteLine("")
+                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+
                 Case "6"
                     Console.WriteLine("Ausgeliehene Bücher eines Benutzers anzeigen ausgewählt.")
-                'Hier könnte der Code zum Anzeigen ausgeliehener Bücher eines Benutzers eingefügt werden
+                    'Hier könnte der Code zum Anzeigen ausgeliehener Bücher eines Benutzers eingefügt werden
+                    Console.WriteLine("")
+                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+
                 Case "7"
                     Console.WriteLine("Programm wird geschlossen. Auf Wiedersehen!")
                     exitProgram = True
@@ -96,8 +112,8 @@ Module Program
                     Console.WriteLine("(7) Programm schließen")
                     Console.WriteLine("==========================================================================")
 
-                    'Absicherung vor ungültiger Eingabe
                 Case Else
+                    'Absicherung vor ungültiger Eingabe
                     Console.WriteLine("Ungültige Auswahl. Bitte wählen Sie eine gültige Option aus.")
 
                     Console.WriteLine("")
