@@ -1,24 +1,38 @@
 Imports System
+Imports System.IO
 
 Module Program
     Sub Main(args As String())
 
+        'ABgeänderte Variante von Bibliothek_1:
+        'Einlesen der bereitgestellten csv-Dateien mit Datensätzen für Bücher und
+        'Anwender.Diese sollen die Testdaten aus Teil I ersetzen.
+        'c) Speicherung dieser Daten in einem sinnvollen Datentyp während der
+        'Programmausführung.Eine Speicherung der Daten über das Ende des
+        'Programms hinaus ist nicht notwendig.
+        'd) Implementierung einer Routine, um neue Benutzer anhand von Eingabedaten des
+        'Anwenders anzulegen.
+        'e) Definition und Berücksichtigung eines Limits von 999 hinterlegten Benutzern.
+        'f) Anpassung der Funktionalität aus Teil I, alle hinterlegten Bücher auszugeben.
+
+        'g) Anpassung der Funktionalität aus Teil I, alle hinterlegten Benutzer auszugeben.
+        'h) Implementierung einer Routine, um anhand einer eingegebenen Nutzer-ID sowie
+        'ISBN ein Buch auszuleihen, sofern dieses verfügbar ist.
+        'i) Implementierung einer Routine, um anhand einer eingegebenen Nutzer-ID sowie
+        'ISBN ein Buch zurückzugeben, sofern dieses ausgeliehen ist.
+        'j) Dokumentation des Codes wo nötig sowie aller Funktionen und Subs mittels der
+        'Header-Templates im Anhang von Teil I.
+        'k) Erfüllung aller funktionalen und technischen Anforderungen.
+
         'Testdaten für hinterlegte Bücher
 
-        Dim libraryTestData As String =
-        "978-3-16-148410-0;Einführung in die Informatik;Müller;verfügbar|" &
-        "978-0-13-110362-7;Programmieren mit VB.NET;Schneider;verfügbar|" &
-        "978-3-540-69006-6;Grundlagen der Softwaretechnik;Meier;ausgeliehen|" &
-        "978-3-642-05445-3;Datenstrukturen und Algorithmen;Klein;verfügbar"
+        Dim libraryData As String =
+        File.ReadAllText("C:\library_books")
 
         'Testdaten für hinterlegte Benutzer
 
-        Dim usrTestData As String =
-        "U001;Max Mustermann|" &
-        "U002;Erika Musterfrau|" &
-        "U003;Hans Meier|" &
-        "U004;Laura Schmidt"
-
+        Dim usrData As String =
+        File.ReadAllText("c:\library_users")
 
         'Willkommenstext und Menüoptionen anzeigen
 
@@ -51,7 +65,7 @@ Module Program
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
                     'Alle Bücher mit Isbn und Titel aus String ausgeben
-                    Dim books As String() = libraryTestData.Split("|"c)
+                    Dim books As String() = libraryData.Split("|"c)
                     For Each book As String In books
                         Dim bookDetails As String() = book.Split(";"c)
                         Console.WriteLine($"ISBN: {bookDetails(0)}, Titel: {bookDetails(1)}")
@@ -60,7 +74,7 @@ Module Program
                 Case "3"
                     Console.WriteLine("ALLE NUTZER.")
                     'Alle Benutzer mit Id und Name aus String ausgeben
-                    Dim users As String() = usrTestData.Split("|"c)
+                    Dim users As String() = usrData.Split("|"c)
                     For Each user As String In users
                         Dim userDetails As String() = user.Split(";"c)
                         Console.WriteLine($"ID: {userDetails(0)}, Name: {userDetails(1)}")
