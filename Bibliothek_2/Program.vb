@@ -14,7 +14,7 @@ Module Program
 
 
         'Willkommenstext und Menüoptionen anzeigen
-        Console.WriteLine("====================================")
+        Console.WriteLine("==========================================================================")
         Console.WriteLine("Willkommen zum Bibliothekssystem!")
         Console.WriteLine("Bitte wählen Sie eine Aktion aus:")
         Console.WriteLine("")
@@ -28,20 +28,33 @@ Module Program
         Console.WriteLine("(5) Buch zurückgeben")
         Console.WriteLine("(6) Ausgeliehene Bücher eines Benutzers anzeigen")
         Console.WriteLine("(7) Programm schließen")
-        Console.WriteLine("=====================================")
+        Console.WriteLine("==========================================================================")
+
         'Schleife, um das Menü erneut anzuzeigen, bis der Benutzer das Programm schließt
         Dim exitProgram As Boolean = False
         While exitProgram = False
 
 
-            'Benutzereingabe einlesen und gewäglte Aktion ausführen
+            'Benutzereingabe einlesen und entsprechende Aktion ausführen
 
             Dim auswahl As String = Console.ReadLine()
             Select Case auswahl
-                Case "1"
+                Case "1" '
                     Console.WriteLine("Neuen Benutzer anlegen ausgewählt.")
-                'Hier könnte der Code zum Anlegen eines neuen Benutzers eingefügt werden
+                    'Implementierung einer Routine, um neue Benutzer anhand von Eingabedaten des Anwenders anzulegenImplementierung einer Routine, um neue Benutzer anhand von Eingabedaten des Anwenders anzulegen
 
+                    Console.WriteLine("Bitte geben Sie den Namen des neuen Benutzers ein:")
+                    Console.Write("Vorname Nachname")
+                    Console.WriteLine("")
+
+                    Dim Name As String = Console.ReadLine()
+
+                    Dim IDNumber As Integer = userData.Length
+                    Dim ID As String = IDNumber.ToString("D3") 'ID mit führenden Nullen formatieren
+
+                    File.AppendAllText("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_users.csv", Environment.NewLine & "U" & ID & "," & Name)
+
+                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
                     'Alle Bücher mit Isbn und Titel aus vorher augelsener Datei ausgeben
@@ -70,6 +83,18 @@ Module Program
                 Case "7"
                     Console.WriteLine("Programm wird geschlossen. Auf Wiedersehen!")
                     exitProgram = True
+
+                Case "menu"
+                    ''Menüoptionen erneut anzeigen
+                    Console.WriteLine("==========================================================================")
+                    Console.WriteLine("(1) Neuen Benutzer anlegen")
+                    Console.WriteLine("(2) Alle Bücher anzeigen")
+                    Console.WriteLine("(3) Alle Benutzer anzeigen")
+                    Console.WriteLine("(4) Buch ausleihen")
+                    Console.WriteLine("(5) Buch zurückgeben")
+                    Console.WriteLine("(6) Ausgeliehene Bücher eines Benutzers anzeigen")
+                    Console.WriteLine("(7) Programm schließen")
+                    Console.WriteLine("==========================================================================")
 
                     'Absicherung vor ungültiger Eingabe
                 Case Else
