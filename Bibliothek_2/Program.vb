@@ -42,24 +42,29 @@ Module Program
                 Case "1" '
                     Console.WriteLine("Neuen Benutzer anlegen ausgewählt.")
                     'Implementierung einer Routine, um neue Benutzer anhand von Eingabedaten des Anwenders anzulegenImplementierung einer Routine, um neue Benutzer anhand von Eingabedaten des Anwenders anzulegen
+                    If userData.Length >= 999 Then
+                        Console.WriteLine("Maximale Anzahl von Benutzern erreicht. Es können keine weiteren Benutzer angelegt werden.")
+                        Console.WriteLine("")
+                        Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
-                    Console.WriteLine("Bitte geben Sie den Namen des neuen Benutzers ein:")
-                    Console.Write("Vorname Nachname")
-                    Console.WriteLine("")
+                    Else
+                        Console.WriteLine("Bitte geben Sie den Namen des neuen Benutzers ein:")
+                        Console.Write("Vorname Nachname")
+                        Console.WriteLine("")
 
-                    Dim Name As String = Console.ReadLine()
+                        Dim Name As String = Console.ReadLine()
 
-                    Dim IDNumber As Integer = userData.Length
-                    Dim ID As String = IDNumber.ToString("D3") 'ID mit führenden Nullen formatieren
+                        Dim IDNumber As Integer = userData.Length
+                        Dim ID As String = IDNumber.ToString("D3") 'ID mit führenden Nullen formatieren
 
-                    File.AppendAllText(userPath, Environment.NewLine & "U" & ID & "," & Name)
+                        File.AppendAllText(userPath, Environment.NewLine & "U" & ID & "," & Name)
 
-                    userData = File.ReadAllLines(userPath) 'Aktualisierte Benutzerdaten erneut einlesen, um die aktuelle Anzahl der Benutzer zu erhalten
+                        userData = File.ReadAllLines(userPath) 'Aktualisierte Benutzerdaten erneut einlesen, um die aktuelle Anzahl der Benutzer zu erhalten
 
-                    Console.WriteLine($"Neuer Benutzer '{Name}' mit ID 'U{ID}' wurde angelegt.")
-                    Console.WriteLine("")
-                    Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
-
+                        Console.WriteLine($"Neuer Benutzer '{Name}' mit ID 'U{ID}' wurde angelegt.")
+                        Console.WriteLine("")
+                        Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
+                    End If
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
                     'Alle Bücher mit Isbn und Titel aus vorher augelsener Datei ausgeben
@@ -82,7 +87,20 @@ Module Program
 
                 Case "4"
                     Console.WriteLine("Buch ausleihen ausgewählt.")
-                    'Hier könnte der Code zum Ausleihen eines Buches eingefügt werden
+                    'Implementierung einer Routine, um anhand einer eingegebenen Nutzer-ID sowie ISBN ein Buch auszuleihen, sofern dieses verfügbar ist.
+                    Console.WriteLine("Bitte geben Sie die ISBN des Buches ein, das Sie ausleihen möchten:")
+                    If Array.IndexOf(libraryData, Console.ReadLine()) = "unavailable" Then
+                        Console.WriteLine("Das Buch mit der angegebenen ISBN ist nicht verfügbar.")
+                        Console.WriteLine("")
+                        Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
+                    Else
+
+                        Console.WriteLine("Bitte geben Sie die ID des Benutzers ein, der ein Buch ausleihen möchte:")
+                        Dim userID As String = Console.ReadLine()
+
+                    End If
+
+
                     Console.WriteLine("")
                     Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
