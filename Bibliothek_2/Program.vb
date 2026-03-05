@@ -52,11 +52,13 @@ Module Program
                     Dim IDNumber As Integer = userData.Length
                     Dim ID As String = IDNumber.ToString("D3") 'ID mit führenden Nullen formatieren
 
-                    File.AppendAllText("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_users.csv", Environment.NewLine & "U" & ID & "," & Name)
+                    File.AppendAllText(userPath, Environment.NewLine & "U" & ID & "," & Name)
+
+                    userData = File.ReadAllLines(userPath) 'Aktualisierte Benutzerdaten erneut einlesen, um die aktuelle Anzahl der Benutzer zu erhalten
 
                     Console.WriteLine($"Neuer Benutzer '{Name}' mit ID 'U{ID}' wurde angelegt.")
                     Console.WriteLine("")
-                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+                    Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
@@ -66,7 +68,7 @@ Module Program
                         Console.WriteLine($"ISBN: {bookDetails(0)}, Titel: {bookDetails(1)}")
                     Next
                     Console.WriteLine("")
-                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+                    Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
                 Case "3"
                     Console.WriteLine("ALLE NUTZER.")
@@ -76,25 +78,25 @@ Module Program
                         Console.WriteLine($"ID: {userDetails(0)}, Name: {userDetails(1)}")
                     Next
                     Console.WriteLine("")
-                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+                    Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
                 Case "4"
                     Console.WriteLine("Buch ausleihen ausgewählt.")
                     'Hier könnte der Code zum Ausleihen eines Buches eingefügt werden
                     Console.WriteLine("")
-                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+                    Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
                 Case "5"
                     Console.WriteLine("Buch zurückgeben ausgewählt.")
                     'Hier könnte der Code zum Zurückgeben eines Buches eingefügt werden
                     Console.WriteLine("")
-                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+                    Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
                 Case "6"
                     Console.WriteLine("Ausgeliehene Bücher eines Benutzers anzeigen ausgewählt.")
                     'Hier könnte der Code zum Anzeigen ausgeliehener Bücher eines Benutzers eingefügt werden
                     Console.WriteLine("")
-                    Console.WriteLine("Um zum Menü geben sie 'menu' ein.")
+                    Console.WriteLine("Um zum Menü zu kommen geben sie 'menu' ein.")
 
                 Case "7"
                     Console.WriteLine("Programm wird geschlossen. Auf Wiedersehen!")
