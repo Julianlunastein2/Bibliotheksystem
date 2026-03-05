@@ -24,15 +24,12 @@ Module Program
         'Header-Templates im Anhang von Teil I.
         'k) Erfüllung aller funktionalen und technischen Anforderungen.
 
-        'Testdaten für hinterlegte Bücher
-
-        Dim libraryData As String =
-        File.ReadAllText("C:\library_books")
+        'Einlesen der bereitgestellten csv-Dateien in ein dynamisches Array mit Datensätzen für Bücher und Anwender
+        Dim libraryData As String = File.ReadAllText("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_books.csv")
 
         'Testdaten für hinterlegte Benutzer
 
-        Dim usrData As String =
-        File.ReadAllText("c:\library_users")
+        Dim usrData As String = File.ReadAllText("C:\Users\julia\source\repos\Informatik\Bibliothek\Bibliothek_2\library_users.csv")
 
         'Willkommenstext und Menüoptionen anzeigen
 
@@ -65,20 +62,26 @@ Module Program
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
                     'Alle Bücher mit Isbn und Titel aus String ausgeben
-                    Dim books As String() = libraryData.Split("|"c)
-                    For Each book As String In books
-                        Dim bookDetails As String() = book.Split(";"c)
-                        Console.WriteLine($"ISBN: {bookDetails(0)}, Titel: {bookDetails(1)}")
+                    Dim lines As String() = libraryData.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+                    For Each line As String In lines
+                        Dim fields As String() = line.Split(","c)
+                        Dim isbn As String = fields(0)
+                        Dim title As String = fields(1)
+                        Console.WriteLine("ISBN: " & isbn & " | Titel: " & title)
                     Next
+
 
                 Case "3"
                     Console.WriteLine("ALLE NUTZER.")
-                    'Alle Benutzer mit Id und Name aus String ausgeben
-                    Dim users As String() = usrData.Split("|"c)
-                    For Each user As String In users
-                        Dim userDetails As String() = user.Split(";"c)
-                        Console.WriteLine($"ID: {userDetails(0)}, Name: {userDetails(1)}")
+                    'Alle Benutzer mit Id und Name aus der oben ausgelesenen Datei ausgeben
+                    Dim usrLines As String() = usrData.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+                    For Each line As String In usrLines
+                        Dim fields As String() = line.Split(","c)
+                        Dim id As String = fields(0)
+                        Dim name As String = fields(1)
+                        Console.WriteLine("ID: " & id & " | Name: " & name)
                     Next
+
 
                 Case "4"
                     Console.WriteLine("Buch ausleihen ausgewählt.")
