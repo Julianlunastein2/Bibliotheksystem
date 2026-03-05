@@ -3,13 +3,9 @@ Imports System
 Module Program
     Sub Main(args As String())
 
-        'Testdaten für hinterlegte Bücher
+        'daten für hinterlegte Bücher aus lokaler "library_books.csv" Datei laden
 
-        Dim libraryTestData As String =
-        "978-3-16-148410-0;Einführung in die Informatik;Müller;verfügbar|" &
-        "978-0-13-110362-7;Programmieren mit VB.NET;Schneider;verfügbar|" &
-        "978-3-540-69006-6;Grundlagen der Softwaretechnik;Meier;ausgeliehen|" &
-        "978-3-642-05445-3;Datenstrukturen und Algorithmen;Klein;verfügbar"
+        Dim libraryData() As String = File.ReadAllLines("C:\library_books.csv")
 
         'Testdaten für hinterlegte Benutzer
 
@@ -51,7 +47,7 @@ Module Program
                 Case "2"
                     Console.WriteLine("BÜCHER BROWSER")
                     'Alle Bücher mit Isbn und Titel aus String ausgeben
-                    Dim books As String() = libraryTestData.Split("|"c)
+                    Dim books As String() = libraryData.Split("|"c)
                     For Each book As String In books
                         Dim bookDetails As String() = book.Split(";"c)
                         Console.WriteLine($"ISBN: {bookDetails(0)}, Titel: {bookDetails(1)}")
